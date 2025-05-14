@@ -1,0 +1,19 @@
+services:
+  osirisgate.http-client.php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: osirisgate.http-client.php:latest
+    container_name: osirisgate.http-client.php
+    restart: unless-stopped
+    command: ["tail", "-f", "/dev/null"]
+    volumes:
+      - "./:/var/www/html"
+    environment:
+      - PHP_IDE_CONFIG=serverName=localhost
+    networks:
+      - osirisgate
+
+networks:
+  osirisgate:
+    driver: bridge
